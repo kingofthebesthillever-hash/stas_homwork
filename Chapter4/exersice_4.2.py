@@ -11,7 +11,7 @@ def lines(t, n, length, angle):
         t.lt(angle)
 
 def arc(t, r, angle):
-    """Рисует дугу с помощью t черепашки пр радиусу r c углом angle"""
+    """Рисует дугу с помощью t черепашки по радиусу r c углом angle"""
     arc_length = 2 * math.pi * r * abs(angle) / 360
     n = int(arc_length / 4) + 3
     step_length = arc_length / n
@@ -22,11 +22,20 @@ def arc(t, r, angle):
     t.rt(step_angle / 2)
 
 def petal(t, r, angle):
-    """Рисует лепесток с помощью t черепашки пр радиусу r c углом angle """
+    """Рисует лепесток с помощью t черепашки по радиусу r c углом angle """
     for i in range(2):
         arc(t, r, angle)
         t.lt(180-angle)
 
-petal(bob,100,50)
+def flower(t, n, r, angle):
+    """Рисует цветок с помощью t черепашки с
+    n: количеством лепестков  c углом angle
+    r: с радиусом дуги лепестка
+    angle: angle (degrees) that subtends the arcs"""
+    for i in range(n):
+        petal(t, r, angle)
+        t.lt(360.0/n)
+
+flower(bob,7,60,60)
 
 turtle.exitonclick()
